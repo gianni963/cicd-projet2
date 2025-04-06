@@ -17,6 +17,6 @@ services:
     image: ghcr.io/gianni963/cicd-projet2/frontend:latest
     pull_policy: always
     ports:
-      - target: 80
-        published: 80
+      - target: 81
+        published: 81
     restart: always
