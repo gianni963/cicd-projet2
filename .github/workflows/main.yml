@@ -111,7 +111,7 @@ jobs:
       #    docker compose down -v --remove-orphans
 
   deploy-production:
-   # needs: e2e
+    needs: build-frontend-and-node-api
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     environment:
