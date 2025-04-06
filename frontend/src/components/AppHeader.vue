@@ -12,7 +12,7 @@ const emit = defineEmits<{
   <nav class="header-container d-flex flex-row align-items px-20">
     <div class="flex-fill d-flex flex-row align-items-center">
       <router-link to="/">
-        <h1>Application</h1>
+        <h1>Application CICD PROJET2 !</h1>
       </router-link>
     </div>
     <ul class="d-flex flex-row align-items-center">
