@@ -123,7 +123,7 @@ jobs:
       - name: deployer sur le server de production
         run: |
           eval $(ssh-agent -s)
-          ssh-add - <<< "${{ secrets.VPS_KEY }}" <<< "${{ secrets.PASSPHRASE }}"
+          ssh-add - <<< "${{ secrets.VPS_KEY }}"
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ env.SERVER_PRODUCTION_IP }} >> ~/.ssh/known_hosts
           scp docker-compose.production.yml ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }}: /root/docker-compose.production.yml
