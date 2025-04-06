@@ -9,7 +9,7 @@ jobs:
         - context_name: ./frontend
           image_name: ghcr.io/gianni963/cicd-projet2/frontend:latest
         - context_name: ./node-api
-          image-name: ghcr.io/gianni963/cicd-projet2/node-api:latest
+          image_name: ghcr.io/gianni963/cicd-projet2/node-api:latest
     permissions:
       packages: write
     steps:
