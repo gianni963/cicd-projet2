@@ -3,11 +3,11 @@ services:
   node-api:
     image: ghcr.io/gianni963/cicd-projet2/node-api:latest
     ports:
-      - '3000:80'
+      - '3000:81'
   frontend:
     image: ghcr.io/gianni963/cicd-projet2/frontend:latest
     ports:
-      - '80:80'
+      - '81:81'
   cypress:
     image: cypress/included
     working_dir: /e2e
