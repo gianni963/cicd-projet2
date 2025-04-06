@@ -8,7 +8,7 @@ jobs:
         include:
         - context_name: ./frontend
           image_name: ghcr.io/gianni963/cicd-projet2/frontend:latest
-        - context: ./node-api
+        - context_name: ./node-api
           image-name: ghcr.io/gianni963/cicd-projet2/node-api:latest
     permissions:
       packages: write
