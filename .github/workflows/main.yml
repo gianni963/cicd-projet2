@@ -110,25 +110,7 @@ jobs:
       #  run: |
       #    docker compose down -v --remove-orphans
 
-  deploy-production:
-    needs: build-frontend-and-node-api
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: production
-      url: http://${{ env.SERVER_PRODUCTION_IP }}
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: deployer sur le server de production
-        run: |
-          eval $(ssh-agent -s)
-          ssh-add - <<< "${{ secrets.VPS_KEY }}"
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.SERVER_PRODUCTION_IP }} >> ~/.ssh/known_hosts
-          scp docker-compose.production.yml ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
-          ssh ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
-          ssh ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
+  
   
      
   deploy-production:
