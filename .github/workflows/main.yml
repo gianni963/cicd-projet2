@@ -116,7 +116,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: production
-      url: http:/${{ SERVER_PRODUCTION_IP }}
+      url: http://${{ env.SERVER_PRODUCTION_IP }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
