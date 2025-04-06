@@ -1,7 +1,7 @@
-/* es-lint-disable */
+/* eslint-disable */
 
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
-    e2E: {}
+  e2e: {}
 });
