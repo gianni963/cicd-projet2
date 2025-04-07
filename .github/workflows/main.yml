@@ -4,7 +4,7 @@ env:
   SERVER_STAGING_IP: "51.75.24.155"
   SERVER_PRODUCTION_IP: "64.225.82.49"
   SERVER_PRODUCTION_USER: root
-  SERVER_STAGING_USER: root
+  SERVER_STAGING_USER: ubuntu
 
 jobs:
   tests-frontend:
