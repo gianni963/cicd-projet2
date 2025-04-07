@@ -5,7 +5,7 @@ services:
     pull_policy: always
     environment:
       - NODE_ENV=production
-    #pullpolicy: always
+    pullpolicy: always
     deploy:
       replicas: 3
       update_config:
@@ -16,7 +16,7 @@ services:
 
   frontend:
     image: ghcr.io/gianni963/cicd-projet2/frontend:latest
-    #pullpolicy: always
+    pullpolicy: always
     pull_policy: always
     ports:
       - target: 81
