@@ -116,7 +116,7 @@ jobs:
     needs: build-frontend-and-node-api
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: staging
       url: http://${{ env.SERVER_STAGING_IP }}
     steps:
       - name: checkout
