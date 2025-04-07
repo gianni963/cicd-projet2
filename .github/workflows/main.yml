@@ -4,6 +4,7 @@ env:
   SERVER_STAGING_IP: "51.75.24.155"
   SERVER_PRODUCTION_IP: "64.225.82.49"
   SERVER_PRODUCTION_USER: root
+  SERVER_STAGING_USER: root
 
 jobs:
   tests-frontend:
@@ -117,7 +118,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment:
       name: production
-      url: http://${{ env.SERVER_STAGIING_IP }}
+      url: http://${{ env.SERVER_STAGING_IP }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -126,13 +127,13 @@ jobs:
           eval $(ssh-agent -s)
           ssh-add - <<< "${{ secrets.VPS_KEY }}"
           mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.SERVER_STAGING_API }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ env.SERVER_STAGING_IP }} >> ~/.ssh/known_hosts
           scp docker-compose.production.yml ${{ env.SERVER_STAGING_USER}}@${{ env.SERVER_STAGING_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
           ssh ${{ env.SERVER_STAGING_USER}}@${{ env.SERVER_STAGING_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
           ssh ${{ env.SERVER_STAGING_USER}}@${{ env.SERVER_STAGING_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
               
   deploy-production:
-    needs: build-frontend-and-node-api
+    needs: deploy-staging
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     environment:
