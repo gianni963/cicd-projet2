@@ -3,8 +3,8 @@ on: push
 env:
   SERVER_STAGING_IP: "51.75.24.155"
   SERVER_PRODUCTION_IP: "64.225.82.49"
-  SERVER_PRODUCTION_USER: root
-  SERVER_STAGING_USER: root
+  SERVER_USER: root
+
 
 jobs:
   tests-frontend:
@@ -128,9 +128,9 @@ jobs:
           ssh-add - <<< "${{ secrets.VPS_KEY }}"
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ env.SERVER_STAGING_IP }} >> ~/.ssh/known_hosts
-          scp docker-compose.production.yml ${{ env.SERVER_STAGING_USER}}@${{ env.SERVER_STAGING_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
-          ssh ${{ env.SERVER_STAGING_USER}}@${{ env.SERVER_STAGING_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
-          ssh ${{ env.SERVER_STAGING_USER}}@${{ env.SERVER_STAGING_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
+          scp docker-compose.production.yml ${{ env.SERVER_USER}}@${{ env.SERVER_STAGING_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
+          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_STAGING_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
+          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_STAGING_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
               
   deploy-production:
     needs: deploy-staging
@@ -148,9 +148,9 @@ jobs:
           ssh-add - <<< "${{ secrets.VPS_KEY }}"
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ env.SERVER_PRODUCTION_IP }} >> ~/.ssh/known_hosts
-          scp docker-compose.production.yml ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
-          ssh ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
-          ssh ${{ env.SERVER_PRODUCTION_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
+          scp docker-compose.production.yml ${{ env.SERVER_USER}}@${{ env.SERVER_PRODUCTION_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
+          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
+          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
 
 
  
