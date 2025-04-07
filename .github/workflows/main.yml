@@ -1,4 +1,4 @@
-name: CI/CD workflow ddd
+name: CI/CD workflow 
 on: push
 env:
   SERVER_STAGING_IP: "51.75.24.155"
