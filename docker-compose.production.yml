@@ -2,10 +2,9 @@ version: '3.9'
 services:
   node-api:
     image: ghcr.io/gianni963/cicd-projet2/node-api:latest
-    pull_policy: always
     environment:
       - NODE_ENV=production
-    pullpolicy: always
+    pull_policy: always
     deploy:
       replicas: 3
       update_config:
@@ -16,7 +15,6 @@ services:
 
   frontend:
     image: ghcr.io/gianni963/cicd-projet2/frontend:latest
-    pullpolicy: always
     pull_policy: always
     ports:
       - target: 81
