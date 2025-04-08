@@ -126,7 +126,7 @@ jobs:
         with: 
           vps_key: ${{ secrets.VPS_KEY }}
           server_ip: ${{ env.SERVER_STAGING_IP }}
-          token_github: ${{ secrets.GIHTUB_TOKEN }}
+          token_github: ${{ secrets.GITHUB_TOKEN }}
               
   deploy-production:
     needs: deploy-staging
@@ -143,7 +143,7 @@ jobs:
         with: 
           vps_key: ${{ secrets.VPS_KEY }}
           server_ip: ${{ env.SERVER_PRODUCTION_IP }}
-          token_github: ${{ secrets.GIHTUB_TOKEN }}
+          token_github: ${{ secrets.GITHUB_TOKEN }}
 
 
  
