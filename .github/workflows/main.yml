@@ -122,14 +122,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: deployer sur le server de staging
-        run: |
-          eval $(ssh-agent -s)
-          ssh-add - <<< "${{ secrets.VPS_KEY }}"
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.SERVER_STAGING_IP }} >> ~/.ssh/known_hosts
-          scp docker-compose.production.yml ${{ env.SERVER_USER}}@${{ env.SERVER_STAGING_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
-          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_STAGING_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
-          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_STAGING_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
+        uses: ./github/actions/deploy
+        with: 
+          vps_key: ${{ secrets.VPS_KEY }}
+          server_ip: ${{ env.SERVER_STAGING_IP }}
+          token_github: ${{ secrets.GIHTUB_TOKEN }}
               
   deploy-production:
     needs: deploy-staging
@@ -142,14 +139,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: deployer sur le server de production
-        run: |
-          eval $(ssh-agent -s)
-          ssh-add - <<< "${{ secrets.VPS_KEY }}"
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.SERVER_PRODUCTION_IP }} >> ~/.ssh/known_hosts
-          scp docker-compose.production.yml ${{ env.SERVER_USER}}@${{ env.SERVER_PRODUCTION_IP }}:/var/www/cicd-projet2/docker-compose.production.yml
-          ssh  ${{ env.SERVER_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN}}"
-          ssh ${{ env.SERVER_USER}}@${{ env.SERVER_PRODUCTION_IP }} "docker compose -f /var/www/cicd-projet2/docker-compose.production.yml up -d --force-recreate"
+        uses: ./github/actions/deploy
+        with: 
+          vps_key: ${{ secrets.VPS_KEY }}
+          server_ip: ${{ env.SERVER_PRODUCTION_IP }}
+          token_github: ${{ secrets.GIHTUB_TOKEN }}
 
 
  
