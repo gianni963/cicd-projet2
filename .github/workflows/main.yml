@@ -122,7 +122,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: deployer sur le server de staging
-        uses: ./github/actions/deploy
+        uses: ./.github/actions/deploy
         with: 
           vps_key: ${{ secrets.VPS_KEY }}
           server_ip: ${{ env.SERVER_STAGING_IP }}
@@ -139,7 +139,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: deployer sur le server de production
-        uses: ./github/actions/deploy
+        uses: ./.github/actions/deploy
         with: 
           vps_key: ${{ secrets.VPS_KEY }}
           server_ip: ${{ env.SERVER_PRODUCTION_IP }}
